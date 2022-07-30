@@ -1,4 +1,4 @@
-{% set version = "0.1.9" %}
+{% set version = "0.1.10" %}
 
 package:
   name: jupyter_server_ydoc
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/j/jupyter_server_ydoc/jupyter_server_ydoc-{{ version }}.tar.gz
-  sha256: 148158d6b3c65d6e0c98f97f8fd35f34030bd2e8517c2619f6a500cd0b7a9d16
+  sha256: d908e4f5432b1e73cdbd4bb62604584066fe4668ac121a3ea0baaffa52526910
 
 build:
   number: 0
