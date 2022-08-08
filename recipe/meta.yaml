@@ -1,4 +1,4 @@
-{% set version = "0.1.10" %}
+{% set version = "0.1.11" %}
 
 package:
   name: jupyter_server_ydoc
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/j/jupyter_server_ydoc/jupyter_server_ydoc-{{ version }}.tar.gz
-  sha256: d908e4f5432b1e73cdbd4bb62604584066fe4668ac121a3ea0baaffa52526910
+  sha256: 73fb8c3118a85bdd53a00c2f297797f2e624df16233214ffe2bef31d0751a4dd
 
 build:
   number: 0
@@ -23,7 +23,7 @@ requirements:
     - python >=3.7
     - jupyter_server
     - jupyter_ydoc >=0.1.16,<0.2.0
-    - ypy-websocket >=0.3.1,<0.4.0
+    - ypy-websocket >=0.3.2,<0.4.0
 
 test:
   imports:
