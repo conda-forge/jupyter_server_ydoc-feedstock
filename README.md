@@ -9,8 +9,6 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/jupyter_server_
 
 Summary: A Jupyter Server Extension providing support for Y documents.
 
-Documentation: https://github.com/jupyter-server/jupyter_server_ydoc
-
 Current build status
 ====================
 
@@ -145,5 +143,6 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
+* [@conda-forge/jupyter_server](https://github.com/conda-forge/jupyter_server/)
 * [@davidbrochart](https://github.com/davidbrochart/)
 
