@@ -21,7 +21,7 @@ requirements:
 
   run:
     - jupyter_server_fileid >=0.6.0,<1
-    - jupyter_ydoc >=0.3.0,<0.4.0
+    - jupyter_ydoc >=0.2.0,<0.4.0
     - python >=3.7
     - ypy-websocket >=0.8.2,<0.9.0
 
@@ -43,7 +43,7 @@ test:
     - pytest -vv --no-cov-on-fail --cov-report=term-missing:skip-covered --cov=jupyter_server_ydoc --cov-fail-under=27
 
 about:
-  home: https://github.com/jupyter-server/jupyter_server_ydoc
+  home: https://github.com/jupyterlab/jupyter_collaboration
   license: BSD-3-Clause
   license_file: LICENSE
   summary: A Jupyter Server Extension providing support for Y documents.
