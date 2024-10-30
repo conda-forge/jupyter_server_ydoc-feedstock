@@ -7,7 +7,7 @@ Home: https://github.com/jupyterlab/jupyter_collaboration
 
 Package license: BSD-3-Clause
 
-Summary: A Jupyter Server Extension providing support for Y documents.
+Summary: jupyter-server extension integrating collaborative shared models.
 
 Current build status
 ====================
