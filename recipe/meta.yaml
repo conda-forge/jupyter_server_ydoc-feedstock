@@ -30,6 +30,8 @@ requirements:
     - jsonschema >=4.18.0
 
 test:
+  requires:
+    - pip
   imports:
     - jupyter_server_ydoc
   commands:
