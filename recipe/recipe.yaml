@@ -15,7 +15,7 @@ source:
 build:
   number: 0
   noarch: python
-  script: 
+  script:
     - ${{ PYTHON }} -m pip install . -vv --no-deps --ignore-installed --no-build-isolation --disable-pip-version-check
 
 requirements:
@@ -37,13 +37,13 @@ tests:
   - python:
       imports: jupyter_server_ydoc
       pip_check: true
-      python_version: 
+      python_version:
         - ${{ python_min }}.*
         - 3.13.*
   - files:
       source:
         - tests/
-    requirements: 
+    requirements:
       run:
         - dirty-equals
         - httpx-ws >=0.5.2
@@ -54,7 +54,7 @@ tests:
     script:
       env:
         JUPYTER_PLATFORM_DIRS: "1"
-      content: 
+      content:
         - coverage run --source=jupyter_server_ydoc --branch -m pytest -vv --tb=long --color=yes
         - coverage report --show-missing --skip-covered --fail-under=73
 
