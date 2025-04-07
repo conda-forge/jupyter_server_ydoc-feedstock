@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
+schema_version: 1
+
+context:
+  version: 2.0.0
+
+package:
+  name: jupyter_server_ydoc
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/j/jupyter_server_ydoc/jupyter_server_ydoc-${{ version }}.tar.gz
+  sha256: 65cb2e0327a85f10d01ab99f26390c4da26382c8cd673471bbd2c0b23680ce23
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+
+requirements:
+  host:
+    - hatchling >=1.4.0
+    - pip
+    - python ${{ python_min }}.*
+  run:
+    - jsonschema >=4.18.0
+    - jupyter_events >=0.11.0
+    - jupyter_server >=2.15.0,<3.0.0
+    - jupyter_server_fileid >=0.7.0,<1
+    - jupyter_ydoc >=2.1.2,<4.0.0,!=3.0.0,!=3.0.1
+    - pycrdt
+    - pycrdt-websocket >=0.15.0,<0.16.0
+    - python >=${{ python_min }}
+
+tests:
+  - python:
+      imports: jupyter_server_ydoc
+      pip_check: true
+      python_version: 
+        - ${{ python_min }}.*
+        - 3.13.*
+  - files:
+      source:
+        - tests/
+    requirements: 
+      run:
+        - dirty-equals
+        - httpx-ws >=0.5.2
+        - importlib_metadata >=4.8.3
+        - pytest-cov
+        - python ${{ python_min }}.*
+    script:
+      - coverage run --source=jupyter_server_ydoc --branch -m pytest -vv --tb=long --color-yes
+      - coverage report --show-missing --skip-covered --fail-under=100
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: jupyter-server extension integrating collaborative shared models.
+  homepage: https://github.com/jupyterlab/jupyter_collaboration
+
+extra:
+  recipe-maintainers:
+    - davidbrochart
+    - conda-forge/jupyter_server
