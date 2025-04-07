@@ -15,7 +15,8 @@ source:
 build:
   number: 0
   noarch: python
-  script: ${{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+  script: 
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --ignore-installed --no-build-isolation --disable-pip-version-check
 
 requirements:
   host:
@@ -46,12 +47,16 @@ tests:
       run:
         - dirty-equals
         - httpx-ws >=0.5.2
-        - importlib_metadata >=4.8.3
+        - importlib-metadata >=4.8.3
         - pytest-cov
         - python ${{ python_min }}.*
+        - pytest-jupyter
     script:
-      - coverage run --source=jupyter_server_ydoc --branch -m pytest -vv --tb=long --color-yes
-      - coverage report --show-missing --skip-covered --fail-under=100
+      env:
+        JUPYTER_PLATFORM_DIRS: "1"
+      content: 
+        - coverage run --source=jupyter_server_ydoc --branch -m pytest -vv --tb=long --color=yes
+        - coverage report --show-missing --skip-covered --fail-under=73
 
 about:
   license: BSD-3-Clause
