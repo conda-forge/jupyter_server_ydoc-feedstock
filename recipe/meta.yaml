@@ -1,4 +1,4 @@
-{% set version = "1.1.0" %}
+{% set version = "2.0.0" %}
 
 {% set python_min = python_min | default("3.9") %}
 
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/j/jupyter_server_ydoc/jupyter_server_ydoc-{{ version }}.tar.gz
-  sha256: 270ec51418a541e81249355781633b71c130e2bf4a0905c88ea23b6ce5080d6f
+  sha256: 65cb2e0327a85f10d01ab99f26390c4da26382c8cd673471bbd2c0b23680ce23
 
 build:
   number: 0
