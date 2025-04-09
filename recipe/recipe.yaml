@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: 2.0.0
+  version: "2.0.1"
 
 package:
   name: jupyter_server_ydoc
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/j/jupyter_server_ydoc/jupyter_server_ydoc-${{ version }}.tar.gz
-  sha256: 65cb2e0327a85f10d01ab99f26390c4da26382c8cd673471bbd2c0b23680ce23
+  sha256: f4fda7f43d0752453e96621f7e7883eed0091146deed0ee38c2fe5f82c69b3f5
 
 build:
   number: 0
