@@ -27,7 +27,7 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-jupyter_server_ydoc-green.svg)](https://anaconda.org/conda-forge/jupyter_server_ydoc) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/jupyter_server_ydoc.svg)](https://anaconda.org/conda-forge/jupyter_server_ydoc) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/jupyter_server_ydoc.svg)](https://anaconda.org/conda-forge/jupyter_server_ydoc) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/jupyter_server_ydoc.svg)](https://anaconda.org/conda-forge/jupyter_server_ydoc) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-jupyter__server__ydoc-green.svg)](https://anaconda.org/conda-forge/jupyter_server_ydoc) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/jupyter_server_ydoc.svg)](https://anaconda.org/conda-forge/jupyter_server_ydoc) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/jupyter_server_ydoc.svg)](https://anaconda.org/conda-forge/jupyter_server_ydoc) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/jupyter_server_ydoc.svg)](https://anaconda.org/conda-forge/jupyter_server_ydoc) |
 
 Installing jupyter_server_ydoc
 ==============================
@@ -145,7 +145,4 @@ Feedstock Maintainers
 
 * [@conda-forge/jupyter_server](https://github.com/orgs/conda-forge/teams/jupyter_server/)
 * [@davidbrochart](https://github.com/davidbrochart/)
-
-
-<!-- dummy commit to enable rerendering -->
 
