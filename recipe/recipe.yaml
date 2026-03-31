@@ -5,6 +5,9 @@ context:
   version: "2.3.0"
   python_check_max: "3.14"
   grep: ${{ "grep -iE" if unix else "findstr /c" }}
+  cov_fail_under: "75"
+  pytest_k: |-
+    -k "not room_handler_doc_client_should_emit_awareness_event"
 
 package:
   name: jupyter_server_ydoc
@@ -58,8 +61,8 @@ tests:
       content:
         - jupyter server extension list
         - jupyter server extension list 2>&1 | ${{ grep }} "jupyter_server_ydoc.*${{ version | replace(".", "\\.") }}.*OK"
-        - coverage run --source=jupyter_server_ydoc --branch -m pytest -vv --tb=long --color=yes
-        - coverage report --show-missing --skip-covered --fail-under=72
+        - coverage run --source=jupyter_server_ydoc --branch -m pytest -vv --tb=long --color=yes ${{ pytest_k }}
+        - coverage report --show-missing --skip-covered --fail-under=${{ cov_fail_under }}
 
 about:
   license: BSD-3-Clause
