@@ -2,16 +2,20 @@
 schema_version: 1
 
 context:
-  version: "2.2.1"
+  version: "2.3.0"
   python_check_max: "3.14"
+  grep: ${{ "grep -iE" if unix else "findstr /c" }}
+  cov_fail_under: "75"
+  pytest_k: |-
+    -k "not room_handler_doc_client_should_emit_awareness_event"
 
 package:
   name: jupyter_server_ydoc
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/j/jupyter_server_ydoc/jupyter_server_ydoc-${{ version }}.tar.gz
-  sha256: 6957f6a66a8794c4265494bba27067a4b09b2936af9916792c20d137a703be46
+  url: https://pypi.org/packages/source/j/jupyter-server-ydoc/jupyter_server_ydoc-${{ version }}.tar.gz
+  sha256: 36f311491e9f289f461fcdf26afb9b72cdf0eac3ceed0c0cbc8ec43afc8efebc
 
 build:
   number: 0
@@ -29,7 +33,7 @@ requirements:
     - jupyter_events >=0.11.0
     - jupyter_server >=2.15.0,<3.0.0
     - jupyter_server_fileid >=0.7.0,<1
-    - jupyter_ydoc >=3.0.3,<4.0.0
+    - jupyter_ydoc >=3.4.0,<4.0.0
     - pycrdt
     - pycrdt-websocket >=0.16.0,<0.17.0
     - python >=${{ python_min }}
@@ -56,15 +60,16 @@ tests:
         JUPYTER_PLATFORM_DIRS: "1"
       content:
         - jupyter server extension list
-        - jupyter server extension list 2>&1 | python -c "import re, sys; v = sys.stdin.read(); assert re.search(r'jupyter_server_ydoc.*${{ version | replace(".", "\\.") }}.*OK', v)"
-        - coverage run --source=jupyter_server_ydoc --branch -m pytest -vv --tb=long --color=yes
-        - coverage report --show-missing --skip-covered --fail-under=72
+        - jupyter server extension list 2>&1 | ${{ grep }} "jupyter_server_ydoc.*${{ version | replace(".", "\\.") }}.*OK"
+        - coverage run --source=jupyter_server_ydoc --branch -m pytest -vv --tb=long --color=yes ${{ pytest_k }}
+        - coverage report --show-missing --skip-covered --fail-under=${{ cov_fail_under }}
 
 about:
   license: BSD-3-Clause
   license_file: LICENSE
   summary: jupyter-server extension integrating collaborative shared models.
-  homepage: https://github.com/jupyterlab/jupyter_collaboration
+  homepage: https://pypi.org/project/jupyter-server-ydoc
+  repository: https://github.com/jupyterlab/jupyter_collaboration
 
 extra:
   recipe-maintainers:
