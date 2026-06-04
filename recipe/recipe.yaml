@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "2.4.0"
+  version: "2.4.1"
   python_check_max: "3.14"
   grep: ${{ "grep -iE" if unix else "findstr /c" }}
   cov_fail_under: "75"
@@ -15,7 +15,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/j/jupyter-server-ydoc/jupyter_server_ydoc-${{ version }}.tar.gz
-  sha256: 74631f47a55d9dadf7dc918d78a083feaecc6c36af4d2fcdf26c0ee36bf70372
+  sha256: 3cdaf0a0eb8a690a18ae4c74e2ab92425a809215744eba430fdf8ebb37219cbb
 
 build:
   number: 0
@@ -33,9 +33,9 @@ requirements:
     - jupyter_events >=0.11.0
     - jupyter_server >=2.15.0,<3.0.0
     - jupyter_server_fileid >=0.7.0,<1
-    - jupyter_ydoc >=3.4.0,<4.0.0
+    - jupyter_ydoc >=3.5.0,<4.0.0
     - pycrdt
-    - pycrdt-websocket >=0.16.0,<0.17.0
+    - pycrdt-websocket >=0.16.2,<0.17.0
     - python >=${{ python_min }}
 
 tests:
