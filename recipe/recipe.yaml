@@ -4,6 +4,11 @@ schema_version: 1
 context:
   version: "2.4.2"
   python_check_max: "3.14"
+  # mismatch-sensitve upstream deps
+  jupyter_ydoc_min: "4.1.1"
+  jupyter_server_min: "2.19.0"
+  pycrdt_websocket_min: "0.16.4"
+  # testing
   grep: ${{ "grep -iE" if unix else "findstr /c" }}
   cov_fail_under: "75"
   pytest_k: |-
@@ -31,11 +36,11 @@ requirements:
   run:
     - jsonschema >=4.18.0
     - jupyter_events >=0.11.0
-    - jupyter_server >=2.15.0,<3.0.0
+    - jupyter_server >=${{ jupyter_server_min }},<3.0.0
     - jupyter_server_fileid >=0.7.0,<1
-    - jupyter_ydoc >=3.5.0,<4.0.0
+    - jupyter_ydoc >=${{ jupyter_ydoc_min }},<4.0.0
     - pycrdt
-    - pycrdt-websocket >=0.16.2,<0.17.0
+    - pycrdt-websocket >=${{ pycrdt_websocket_min }},<0.17.0
     - python >=${{ python_min }}
 
 tests:
@@ -45,6 +50,14 @@ tests:
       python_version:
         - ${{ python_min }}.*
         - ${{ python_check_max }}.*
+  - requirements:
+      run:
+        - python ${{ python_min }}.*
+        - jupyter_server ${{ jupyter_server_min }}.*
+        - jupyter_ydoc ${{ jupyter_ydoc_min }}.*
+        - pycrdt-websocket ${{ pycrdt_websocket_min }}.*
+    script:
+      - pip check
   - files:
       source:
         - tests/
@@ -55,10 +68,12 @@ tests:
         - pytest-cov
         - python ${{ python_min }}.*
         - pytest-jupyter
+        - pip
     script:
       env:
         JUPYTER_PLATFORM_DIRS: "1"
       content:
+        - pip check
         - jupyter server extension list
         - jupyter server extension list 2>&1 | ${{ grep }} "jupyter_server_ydoc.*${{ version | replace(".", "\\.") }}.*OK"
         - coverage run --source=jupyter_server_ydoc --branch -m pytest -vv --tb=long --color=yes ${{ pytest_k }}
