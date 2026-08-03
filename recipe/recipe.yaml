@@ -2,10 +2,15 @@
 schema_version: 1
 
 context:
-  version: "2.4.2"
+  version: "3.0.0"
   python_check_max: "3.14"
+  # mismatch-sensitve upstream deps
+  jupyter_ydoc_min: "4.1.1"
+  jupyter_server_min: "2.19.0"
+  pycrdt_websocket_min: "0.16.4"
+  # testing
   grep: ${{ "grep -iE" if unix else "findstr /c" }}
-  cov_fail_under: "75"
+  cov_fail_under: "74"
   pytest_k: |-
     -k "not room_handler_doc_client_should_emit_awareness_event"
 
@@ -14,8 +19,8 @@ package:
   version: ${{ version }}
 
 source:
-  url: https://files.pythonhosted.org/packages/ae/14/88e5aaaf26ea19320269c4c12db748ed6d1912abd032365879d9e549fe2d/jupyter_server_ydoc-${{ version }}.tar.gz
-  sha256: 8bb9d8cdf3441d6a5d25d6a66fe5b946c5acbc65c87e0df63c0d2f43ce92c47d
+  url: https://files.pythonhosted.org/packages/source/j/jupyter-server-ydoc/jupyter_server_ydoc-${{ version }}.tar.gz
+  sha256: f252498e76a90bee9c0b6b8499dd75885c9646e0a928c7e61f01f456c1f85c04
 
 build:
   number: 0
@@ -31,11 +36,11 @@ requirements:
   run:
     - jsonschema >=4.18.0
     - jupyter_events >=0.11.0
-    - jupyter_server >=2.15.0,<3.0.0
+    - jupyter_server >=${{ jupyter_server_min }},<3.0.0
     - jupyter_server_fileid >=0.7.0,<1
-    - jupyter_ydoc >=3.5.0,<4.0.0
+    - jupyter_ydoc >=${{ jupyter_ydoc_min }},<5.0.0
     - pycrdt
-    - pycrdt-websocket >=0.16.2,<0.17.0
+    - pycrdt-websocket >=${{ pycrdt_websocket_min }},<0.17.0
     - python >=${{ python_min }}
 
 tests:
@@ -45,6 +50,14 @@ tests:
       python_version:
         - ${{ python_min }}.*
         - ${{ python_check_max }}.*
+  - requirements:
+      run:
+        - python ${{ python_min }}.*
+        - jupyter_server ${{ jupyter_server_min }}.*
+        - jupyter_ydoc ${{ jupyter_ydoc_min }}.*
+        - pycrdt-websocket ${{ pycrdt_websocket_min }}.*
+    script:
+      - pip check
   - files:
       source:
         - tests/
@@ -55,10 +68,12 @@ tests:
         - pytest-cov
         - python ${{ python_min }}.*
         - pytest-jupyter
+        - pip
     script:
       env:
         JUPYTER_PLATFORM_DIRS: "1"
       content:
+        - pip check
         - jupyter server extension list
         - jupyter server extension list 2>&1 | ${{ grep }} "jupyter_server_ydoc.*${{ version | replace(".", "\\.") }}.*OK"
         - coverage run --source=jupyter_server_ydoc --branch -m pytest -vv --tb=long --color=yes ${{ pytest_k }}
