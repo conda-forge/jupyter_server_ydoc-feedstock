@@ -2,7 +2,7 @@
 schema_version: 1
 
 context:
-  version: "3.0.1"
+  version: "3.0.2"
   python_check_max: "3.14"
   # mismatch-sensitve upstream deps
   jupyter_ydoc_min: "4.1.1"
@@ -20,7 +20,7 @@ package:
 
 source:
   url: https://files.pythonhosted.org/packages/source/j/jupyter-server-ydoc/jupyter_server_ydoc-${{ version }}.tar.gz
-  sha256: 54ef4eabda6a638e68805016f7c219350bfe4ddcd3cf5b6f930b4f6d0096354b
+  sha256: 96610a0547130d47d19038a154a6d671408c800558e04fb8c12da93815a9caa1
 
 build:
   number: 0
